@@ -1,21 +1,39 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {Stylesheet} from 'react-native';
+import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
+import {Provider} from './src/Context/BlogContext';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+import IndexScreen from './src/Screens/IndexScreen';
+import ShowScreen from './src/Screens/ShowScreen';
+import EditScreen from './src/Screens/EditScreen';
+import CreateScreen from './src/Screens/CreateScreen';
+
+
+const navigator = createStackNavigator({
+  Index:IndexScreen,
+  Show:ShowScreen,
+  Edit:EditScreen,
+  Create:CreateScreen
+
+},
+{
+  initialRouteName:'Index',
+  defaultNavigationOptions:{
+    title:'BLOGERA',
+  
+  }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+)
+
+const App= createAppContainer(navigator);
+
+export default ()=>{
+  return(
+    <Provider>
+        <App/>
+    </Provider>
+  );
+}
