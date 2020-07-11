@@ -9,9 +9,9 @@ const ShowScreen=({navigation})=>{
     const {state}=useContext(Context);
     const blogPost=state.find(post=>post.id===id);
     return(
-        <View>
-            <Text>{blogPost.title}</Text>
-            <Text>{blogPost.content}</Text>
+        <View style={styles.container}>
+            <Text style={styles.title}>{blogPost.title}</Text>
+            <Text style={styles.content}>{blogPost.content}</Text>
         </View>
 
     );
@@ -19,11 +19,33 @@ const ShowScreen=({navigation})=>{
 }
 ShowScreen.navigationOptions=({navigation})=>{
     return{
+        headerTitleAlign: 'center',
+        headerStyle: { backgroundColor: '#FF6766'},
+        headerTitleStyle: { color: '#FFF' },
         headerRight:()=><TouchableOpacity onPress={()=>navigation.navigate('Edit',{id:navigation.getParam('id')})}>
-        <EvilIcons name='pencil' size={35}/>
+        <EvilIcons name='pencil' size={35} style={{color:'#FFF'}}/>
     </TouchableOpacity>
+        
+       
     }
 }
-const styles=StyleSheet.create({});
+const styles=StyleSheet.create({
+    container:{
+        backgroundColor:'#FFF',
+        alignItems:'center',
+        flex:1
+    },
+    title:{
+        fontSize: 26,
+        fontWeight: "bold",
+        marginVertical:20,
+    },
+    content:{
+        marginHorizontal:7,
+        fontSize:20,
+        fontWeight:'100',
+
+    }
+});
 
 export default ShowScreen

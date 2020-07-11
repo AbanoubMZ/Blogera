@@ -7,7 +7,7 @@ const IndexScreen=({navigation})=>{
     const {state,deleteBlogPost}=useContext(Context);
     
     return(
-        <View>
+        <View style={styles.container}>
             <FlatList
                 data={state}
                 keyExtractor={blogPost=>blogPost.title}
@@ -15,7 +15,7 @@ const IndexScreen=({navigation})=>{
                    return(
                        <TouchableOpacity onPress={()=> navigation.navigate('Show',{id:item.id})}>
                             <View style={styles.postView}>
-                                <Text style={styles.postTitle}>{item.title} - {item.id}</Text>
+                                <Text style={styles.postTitle}>{item.title}</Text>
                                 <TouchableOpacity onPress={()=>deleteBlogPost(item.id)}>
                                     <Feather style={styles.actionIcon} name="trash"/>
                                 </TouchableOpacity>
@@ -33,12 +33,18 @@ const IndexScreen=({navigation})=>{
 
 IndexScreen.navigationOptions=({navigation})=>{
     return{
+        headerTitleAlign: 'center',
+        headerStyle: { backgroundColor: '#FF6766'},
+        headerTitleStyle: { color: '#FFF' },
         headerRight:()=><TouchableOpacity onPress={()=>navigation.navigate('Create')}>
-            <Feather name='plus' size={30}/>
+            <Feather name='plus' size={30} style={{color:'#FFF'}}/>
         </TouchableOpacity>,
     }
 }
 const styles=StyleSheet.create({
+    container:{
+        backgroundColor:'#FFF'
+    },
     postView:{
         flexDirection:"row",
         justifyContent:"space-between",

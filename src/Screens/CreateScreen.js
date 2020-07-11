@@ -1,5 +1,5 @@
 import React,{useContext} from 'react';
-import {View,StyleSheet} from 'react-native';
+import {View,StyleSheet,StatusBar,Image} from 'react-native';
 import {Context} from '../Context/BlogContext';
 import BlogPostForm from '../Components/BlogPostForm'
 
@@ -7,13 +7,29 @@ const CreateScreen=({navigation})=>{
     const {addBlogPost}=useContext(Context);
 
     return(
-        <BlogPostForm onSubmit={(title,content)=>{
-            addBlogPost(title,content,()=>navigation.navigate('Index'))
-            }
-        }/>
-
+        <View>
+            <StatusBar barStyle="light-content"></StatusBar>
+            <Image
+                source={require("../../assets/Header.png")}
+                style={{ marginTop: -210, marginLeft: -50 }}
+            ></Image>
+            <Image
+                source={require("../../assets/Footer.png")}
+                style={{ position: "absolute", bottom: -325, right: -225 }}
+            ></Image>
+        
+            <BlogPostForm onSubmit={(title,content)=>{
+                addBlogPost(title,content,()=>navigation.navigate('Index'))
+                }
+            }/>
+        </View>
     );
 
+}
+CreateScreen.navigationOptions=()=>{
+    return {
+        header:()=>false
+    }
 }
 const styles=StyleSheet.create({
     input:{
