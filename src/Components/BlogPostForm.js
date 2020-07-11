@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import {Text,TextInput,StyleSheet,View, TouchableOpacity} from 'react-native';
 
-const BlogPostForm=({onSubmit,initalValues})=>{
+const BlogPostForm=({onSubmit,initalValues,callBack})=>{
     const [Title,setTitle]=useState(initalValues.title);
     const [Content,setContent]=useState(initalValues.content);
     
@@ -26,10 +26,17 @@ const BlogPostForm=({onSubmit,initalValues})=>{
                 placeholder="Enter content here"
                 />
 
+            <View style={styles.buttonsContainer}>
+                <TouchableOpacity style={styles.button} onPress={()=>onSubmit(Title,Content)}>
+                            <Text style={{ color: "#FFF", fontWeight: "500" }}>Save Post</Text>
+                </TouchableOpacity>
 
-            <TouchableOpacity style={styles.button} onPress={()=>onSubmit(Title,Content)}>
-                        <Text style={{ color: "#FFF", fontWeight: "500" }}>Save Post</Text>
-            </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={()=>callBack.pop()}>
+                        <Text style={{ color: "#FFF", fontWeight: "500" }}>Cancel</Text>
+                </TouchableOpacity>
+
+            </View>
+           
 
     </View>
     );
@@ -76,7 +83,8 @@ const styles=StyleSheet.create({
         height: 52,
         alignItems: "center",
         justifyContent: "center"
-    }
+    },
+   
 });
 
 export default BlogPostForm

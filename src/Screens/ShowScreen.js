@@ -1,5 +1,5 @@
 import React,{useContext} from 'react';
-import {View,Text,StyleSheet,TouchableOpacity} from 'react-native';
+import {View,Text,StyleSheet,TouchableOpacity,Image} from 'react-native';
 import {Context} from '../Context/BlogContext';
 import {EvilIcons} from '@expo/vector-icons';
 
@@ -10,8 +10,13 @@ const ShowScreen=({navigation})=>{
     const blogPost=state.find(post=>post.id===id);
     return(
         <View style={styles.container}>
+            <Image
+                source={require("../../assets/Footer.png")}
+                style={{ position: "absolute", bottom: -325, right: -225 }}
+            />
             <Text style={styles.title}>{blogPost.title}</Text>
             <Text style={styles.content}>{blogPost.content}</Text>
+            <Text style={styles.date}>{blogPost.date}</Text>
         </View>
 
     );
@@ -32,19 +37,27 @@ ShowScreen.navigationOptions=({navigation})=>{
 const styles=StyleSheet.create({
     container:{
         backgroundColor:'#FFF',
-        alignItems:'center',
+        alignItems:'flex-start',
         flex:1
     },
     title:{
         fontSize: 26,
         fontWeight: "bold",
         marginVertical:20,
+        alignSelf:'center'
     },
     content:{
         marginHorizontal:7,
-        fontSize:20,
-        fontWeight:'100',
+        fontSize:18,
+        fontWeight:'100'
 
+    },
+    date:{
+        fontSize:14,
+        color:'gray',
+        alignSelf:'flex-end',
+        marginTop:25,
+        marginHorizontal:5
     }
 });
 

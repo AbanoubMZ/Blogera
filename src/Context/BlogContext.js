@@ -7,7 +7,9 @@ const blogReducer =(state,action)=>{
         case 'add_blogpost':
             return [...state,{id:Math.floor(Math.random()*99999),
                 title: action.payload.title,
-                content:action.payload.content}];
+                content:action.payload.content,
+                date:new Date().toString()
+            }];
         case 'edit_blogpost':
         return state.map(post=>{
             return post.id===action.payload.id ? action.payload:post;
@@ -34,7 +36,8 @@ const addBlogPost=(dispatch)=>{
 };
 const editBlogPost=(dispatch)=>{
     return(id,title,content,callback)=>{
-        dispatch({type:'edit_blogpost',payload:{id,title,content}})
+        const date= new Date().toString();
+        dispatch({type:'edit_blogpost',payload:{id,title,content,date}})
         if(callback){
             callback();
         }

@@ -1,5 +1,5 @@
 import React,{useContext} from 'react';
-import {View,Text,StyleSheet,FlatList,Button,TouchableOpacity} from 'react-native';
+import {View,Text,StyleSheet,FlatList,Image,TouchableOpacity} from 'react-native';
 import {Context} from '../Context/BlogContext';
 import {Feather} from '@expo/vector-icons';
 const IndexScreen=({navigation})=>{
@@ -15,7 +15,10 @@ const IndexScreen=({navigation})=>{
                    return(
                        <TouchableOpacity onPress={()=> navigation.navigate('Show',{id:item.id})}>
                             <View style={styles.postView}>
-                                <Text style={styles.postTitle}>{item.title}</Text>
+                               <View style={styles.postDetails}>
+                                    <Text style={styles.postTitle}>{item.title}</Text>
+                                    <Text style={styles.postDate}>{item.date}</Text>
+                               </View>
                                 <TouchableOpacity onPress={()=>deleteBlogPost(item.id)}>
                                     <Feather style={styles.actionIcon} name="trash"/>
                                 </TouchableOpacity>
@@ -54,12 +57,25 @@ const styles=StyleSheet.create({
         borderTopWidth:1,
     },
     postTitle:{
-        fontSize:18,
+        fontSize:20,
     },
     actionIcon:{
-        fontSize:24,
-        color:'red'
+        fontSize:35,
+        color:'#FF6766'
+    },
+    postDate:{
+        fontSize:10,
+        color:'gray',
+        alignSelf:'flex-start',
+        justifyContent:'flex-start',
+        marginTop:4
+
+    },
+    postDetails:{
+        flexDirection:'column'
     }
+
+
 
 });
 export default IndexScreen

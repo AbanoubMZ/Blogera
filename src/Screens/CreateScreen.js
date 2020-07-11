@@ -19,9 +19,9 @@ const CreateScreen=({navigation})=>{
             ></Image>
         
             <BlogPostForm onSubmit={(title,content)=>{
-                addBlogPost(title,content,()=>navigation.navigate('Index'))
-                }
-            }/>
+                addBlogPost(title,content,()=>navigation.navigate('Index'))}}
+                callBack={navigation}
+            />
         </View>
     );
 
